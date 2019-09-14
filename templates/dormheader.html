@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+
+    
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default" style="">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{url_for('dormhome')}}">DormRoom</a>
+    </div>
+    <ul class="nav navbar-nav">
+      {% if request.args.get("query") is none  %}
+     <form method="GET" action="{{url_for('search')}}" style="float: left; margin-top: 10px; "> <input style="height: 30px;" class="form-control" type = "search" placeholder="search..."  name="query"  />
+      <input type="hidden" name="page" value="1"></form>
+    {% else %}
+ <form method="GET" action="{{url_for('search')}}" style="float: left; margin-top: 10px; "> <input type = "search" name="query" value="{{request.args.get('query')}}" />
+      <input type="hidden" name="page" value="1"></form>
+    {%  endif  %}
+
+      {% if session.get("name")  %}
+
+      <li><a id="me" href="{{url_for('me')}}" style="float: right; margin-left: 700px;">me</a></li>
+      <li><a id="logout" href="{{url_for('logout')}}">logout</a></li>
+      <li><a id="post" href = "{{url_for('post')}}">post</a></li>
+      <li><a href="{{url_for('map')}}">map</a></li>
+
+
+      {% else %}
+       <li><a id="registerandlogin" href="{{url_for('registerandlogin')}}" style=" float:right; margin-left:700px;">register/login</a></li>
+      {% endif  %}
+
+
+
+   
+    </ul>
+  </div>
+</nav>
+
+
+
+</body>
+</html>
+
+

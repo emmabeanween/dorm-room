@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<style>
+		
+	img:hover {
+		width: 500px;
+		height: 500px;
+
+	}
+
+	#send:hover {
+     
+     color: darkgray;
+      
+	}
+
+	#close:hover {
+
+		cursor: pointer;
+	}
+	
+
+	</style>
+
+  </head>
+<body>
+
+    {%  include 'dormheader.html'  %}
+
+  {%  for message in get_flashed_messages()   %}
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{message}}</strong> 
+  </div>
+{%   endfor  %} 
+
+   <h1 style="margin-left: 420px; margin-top: 60px; font-size: 30px; color: darkblue; width: 450px;"> {{post.listing_title}}</h1></br></br>
+   <div style="margin-left: 430px; width: 350px; font-size: 15px; margin-top: 20px;">{{post.listing_description}}</div></br></br>
+
+   <!--include two reqired photos-->
+
+<img width="200" height="200" style= " border: 1px solid black; margin-left: 400px;" src="data:;base64,{{ post.listing_photo_one.decode('utf-8', errors= 'replace') }}"/> 
+<img width="200" height="200" style= " border: 1px solid black; margin-left: 10px;" src="data:;base64,{{ post.listing_photo_two.decode('utf-8', errors= 'replace') }}"/> 
+
+{% if post.listing_photo_three != "" %}
+
+<img width="200" height="200" style= " border: 1px solid black; margin-left: 10px; " src="data:;base64,{{ post.listing_photo_three.decode('utf-8', errors= 'replace') }}"/> </br></br></br>
+
+{% else  %}
+
+</br></br></br>
+
+
+
+
+{% endif %}
+
+
+
+
+{%  if post.listing_photo_four == "" and post.listing_photo_five == ""  %}
+
+<div style="width: 300px; height: 200px; margin-left: 430px;">
+
+<span><b>listing address: </b> {{post.listing_address}}, {{post.listing_city}}, {{post.listing_state}} </br></span>
+	
+<span><b>contact name: </b>{{post.listing_seller}}</span></br>
+
+<span><b>contact phone: </b>{{post.listing_phone}}</span></br>
+
+<span><b>contact email: </b>{{post.listing_email}}</span></br></br></br>
+
+<button id="send">email lister</button>
+
+</div>
+
+{%  else %}
+
+<img width="200" height="200" style= "float: left; border: 1px solid black; margin-left: 400px;" src="data:;base64,{{ post.listing_photo_four.decode('utf-8', errors= 'replace') }}"/> </br></br></br></br></br></br></br></br></br>
+
+
+{%  if post.listing_photo_five !="" %}
+
+
+<img width="200" height="200" style= "float: left; border: 1px solid black; margin-left: 10px;" src="data:;base64,{{ post.listing_photo_five.decode('utf-8', errors= 'replace') }}"/> </br></br></br>
+
+
+
+
+{% endif  %}
+
+</br></br></br>
+<div style="width: 300px; height: 200px; margin-left: 430px;">
+
+<span><b>listing address: </b> {{post.listing_address}}, {{post.listing_city}}, {{post.listing_state}}</br></span>
+
+<span><b>contact name: </b>{{post.listing_seller}}</span></br>
+
+<span><b>contact phone: </b>{{post.listing_phone}}</span></br>
+
+<span><b>contact email: </b>{{post.listing_email}}</span></br></br></br>
+
+<button id="send">email lister</button>
+
+
+
+</div>
+
+
+
+{%  endif  %}
+
+
+
+
+
+<div id="contact" style="width: 360px; height:360px; padding: 10px; border: 1px solid black; top:25%; bottom: 0; right: 0; left: 35%; position: absolute; background-color: lightgray;"> <div id="close" style="line-height: 12px; font-size: 20px; padding: 1px; background-color: white;
+     border: 0.5px solid black; width: 16px; height: 15px; margin-top: 1px; margin-right: 5px; position:absolute;  top:-2%; right:-2%;">x</div>
+	<form method= "POST" style="margin-left: 20px; margin-top: 30px;">
+		<label>from</label></br>
+		<input type="email" class="form-control" name="from" value="{{email}}"></br>
+		<label>to </label></br>
+		<input type="email" class="form-control" name="to" value="{{post.listing_email}}"></br></br>
+		<textarea style="width: 200px; height: 100px;" name="message">Hey! Saw your listing and was interested in your place. I'm a third-year and...</textarea></br>
+		<input style="margin-left: 40px;" id="send" type="submit" name="button" value="send">
+
+	</form>
+
+</div>
+
+
+
+<script>
+
+$( function() {
+    $( "#contact" ).hide();
+  } );
+
+
+$("#send").click(function(){
+
+	$("#contact").show();
+
+});
+
+$("#close").click(function(){
+
+	$("#contact").hide();
+
+});
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

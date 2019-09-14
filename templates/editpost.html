@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+
+{%   include 'dormheader.html'    %}
+
+
+
+<h1 style="margin-top: 40px; margin-left: 550px;">edit post</h1><i style="margin-left: 600px; font-size: 40px;" class="fa fa-pencil" aria-hidden="true"></i>
+
+<div style=" overflow-y: auto;width: 450px; height: 400px; margin-top: 20px; background-color: #f7efef; border: 0.5px solid gray; margin-left: 400px;">
+<form action="" method="POST">
+
+ <div class="form-group">
+    <label for="title">title</label>
+    <input type="text" name="title" style="width:95%;" class="form-control" name="title" value="{{listing_to_edit.listing_title}}">
+  </div>
+
+   <div class="form-group">
+    <label for="description">description</label>
+    <textarea class="form-control" name="description">  {{listing_to_edit.listing_description}}  </textarea>
+  </div>
+
+    <div class="form-group">
+    <label for="address">address</label>
+    <input type="text" class="form-control" name="address" value="{{listing_to_edit.listing_address}}" >
+</div>
+
+   <div class="form-group">
+    <label for = "aptnumber">apt/suite# (optional)</label>
+    <input type="text" class="form-control" name="aptnumber" value="{{listing_to_edit.listing_number}}">
+
+    </div>
+
+    <div class="form-group">
+    	<label for = "city"> city </label>
+        <input type = "text" class="form-control" name="city" value="{{listing_to_edit.listing_city}}">
+    </div>
+
+    <div class="form-group">
+    <label for = "state">state</label>
+    <input type = "text" class="form-control" name="state" value="{{listing_to_edit.listing_state}}">
+    </div>
+
+
+	<div class = "form-group">
+		<label for = "price">price</label>
+		<input type = "text" class="form-control" name="price" value="{{listing_to_edit.listing_price|round(0)}}"  >
+	</div>
+
+
+     <div class="form-group">
+    <label for="address"> contact phone number</label>
+    <input type="text" class="form-control" name="phonenumber" value="{{listing_to_edit.listing_phone}}">
+ 	</div>
+
+ 	<div class="form-group">
+ 		<label for="contact">contact name</label></br>
+ 		<input type="text" name="contactname" placeholder="{{name}}" value="{{listing_to_edit.listing_seller}}">
+ 	</div>
+    
+    <div class="form-group">
+    	<label>contact email</label></br>
+      <input type="email" class="form-control" name="contactemail" placeholder="{{email}}" value="{{listing_to_edit.listing_email}}">
+    </div>
+
+    <div class="form-group">
+    	<label>photos</label></br>
+	<input type = "file" name="photos[]" value="photos[]"  multiple/>
+   </div>
+ 
+
+
+</div>
+
+  <button type="submit" class="btn btn-default" style="background-color: lightgreen; margin-left: 500px;" name="update">update</button>
+
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+	{%  include 'dormheader.html'  %}
+
+
+     {% if session.get("school") == None  %}
+     <h1 style="margin-left: 400px; margin-top: 40px; font-size: 25px;">listing results for <b>all schools</b> for <b>'{{request.args.get("query")}}' </b> </h1>
+     {%  else  %}
+	<h1 style="margin-left: 400px; margin-top: 40px; font-size: 25px;">listing results for <b>{{session.get("school")}}</b> for <b>'{{request.args.get("query")}}' </b> </h1>
+
+	{%  endif  %}
+
+</br></br></br></br>
+
+
+{% for post in searched_posts.items  %}
+
+
+</br></br>
+<img width="200" height="200" style= "float: left; border: 1px solid black; margin-left: 260px;" src="data:;base64,{{ post.listing_photo_one.decode('utf-8', errors= 'replace') }}"/> 
+<span style="font-size: 20px; color: black; margin-top: 50px; margin-left: 20px;"><a style="color: blue;" href="{{url_for('viewpost', id = post.listing_id)}}">{{post.listing_title}}</a></span>
+</br></br>
+<span style="margin-left: 30px;"> listed at <b>{{post.listing_address}}</b></span></br></br>
+{%  if (date - post.listing_added).days  == 1 %}
+<span style="margin-left: 30px;"> listed <b>{{(date-post.listing_added).days}} day ago</b></span>
+{%  else %}
+
+<span style="margin-left: 30px;"> listed <b> {{(date - post.listing_added).days}} days ago </b></span>
+
+{%    endif   %} </br></br>
+
+
+<span style="margin-left:30px;">listed for <b>${{post.listing_price|round}}</b></span>
+
+</br></br></br></br></br></br></br></br></br></br>
+
+
+{%  endfor  %}
+
+ 
+{%   for page in searched_posts.iter_pages()   %}
+<div style="text-align: center; "><a style="color: blue;" href= "/search?query={{query}}&page={{page}}">{{page}}</a></div>
+{% endfor  %}   
+
+</body>
+</html>

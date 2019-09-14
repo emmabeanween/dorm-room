@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+  
+      #map {
+         
+  width: 80%; height: 500px;
+  margin-left: 100px;
+  box-shadow: 2px 8px 6px 8px #dadee5;
+  position: absolute;
+  border: 2px solid black;
+  
+       }
+
+
+       
+    </style>
+  </head>
+  <body>
+
+{%   include 'dormheader.html'   %}
+   
+
+
+
+    <div id="map"></div>
+
+
+    <script>
+    
+// Initialize and add the map
+function initMap() {
+
+  // pass in campus coordinates from dorm.py - loop through seven campuses on backend
+    var campus = {lat: {{latitude}}, lng: {{longitude}}};
+  
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 15, center: campus});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: test, map: map});
+
+{% for location in locations %}
+  var lat = {{location.listing_lat}};
+  var long = {{location.listing_long}};
+  var test = {lat: lat , lng: long};
+
+
+  var marker = new google.maps.Marker({position: test, map: map, url: '/viewpost/{{location.listing_id}}'});
+
+google.maps.event.addListener(marker, 'click', function() {
+    window.location.href = this.url;
+});
+
+
+var infowindow =  new google.maps.InfoWindow({
+    content: '{{location.listing_title}}',
+  
+  });
+
+google.maps.event.addListener(marker, 'mouseover', function() {
+      infowindow.open(map,marker);
+    });
+
+{% endfor  %}
+
+}
+
+
+    </script>
+
+   <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1BgSPIhGv4Kibq3uLbGkJiwkVTT1GyRA&callback=initMap">
+</script>
+   
+  </body>
+</html>

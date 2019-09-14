@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+	
+	#name {
+
+    animation:blinkingText 4s infinite;
+}
+
+@keyframes blinkingText{
+    0%{     color: #95bced   }
+    49%{    color: #277ee8 }
+    50%{    color: #277ee8}
+    99%{    color: #277ee8}
+    100%{   color: #95bced   }
+}
+</style>
+<body>
+{% include 'dormheader.html' %}
+
+<div>
+<h1 style="margin-left: 430px; margin-top: 80px;"><span style="font-size: 20px;">a lil' info about you,</span> <span id="name"> {{session.get("name")}}</span></h1>
+<i class="fa fa-user" style="font-size: 150px; margin-left: 520px;" aria-hidden="true"></i></br></br>
+{%  if days == 1 %}
+<span style="font-size: 18px; margin-left: 500px;">you joined <b>{{days}}</b> day ago</span>
+{%  else  %}
+<span style="font-size: 18px; margin-left: 500px;">you joined <b>{{days}} </b> days ago </span>
+{%  endif  %}
+</br></br>
+
+
+{%  if num_posts == 1    %}
+<span style="font-size: 18px; margin-left: 490px;">you have <b>{{num_posts}}</b> post in total</span></br></br>
+{%    else   %}
+<span style="font-size: 18px; margin-left: 490px;" >you have <b>{{num_posts}}</b> posts in total</span></br></br>
+{%  endif  %}
+
+<span style="font-size:17px; margin-left: 530px;"><a href='userlistings'>your listings</a></span></br>
+
+<hr style= "width: 30%; color:darkgray;">
+<form method="POST" action="{{url_for('me')}}" style="margin-left: 450px;">
+ <label style="margin-left: 80px;">your school</label></br>
+<select name="school" id="school">
+  <option value="UCSD">University of California, San Diego</option>
+  <option value="UCD">University of California, Davis</option>
+  <option value="UCB">University of California, Berkeley</option>
+  <option value="UCSC">University of California, Santa Cruz</option>
+  <option value = "UCSB">University of California, Santa Barbara</option>
+  <option value = "UCI">University of California, Irvine</option>
+  <option value = "UCLA">University of California, Los Angeles</option>
+</select></br></br>
+<input style=" background:none!important; color:blue; border:none; padding:0!important; 
+      margin-left: 100px;" type = "submit" name="button" value="change">
+</form>
+
+<script>
+	$(function() {
+     $("#school").val("{{school}}").prop('selected', true);
+  
+});
+</script>
+
+<hr style= "width: 30%; color:darkgray;">
+<span style="margin-left: 520px; font-size: 15px;"> <form method="POST" action="{{url_for('me')}}" style="margin-left: 520px;">
+	<input style=" background:none!important; color:red; border:none; padding:0!important; border-bottom:1px solid #444; 
+     cursor: pointer;" type = "submit" name="button" value="delete account">
+</form></span>
+
+</div>
+</body>
+</html>

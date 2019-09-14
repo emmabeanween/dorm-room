@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		table, th, td {
+  border: 0.5px solid black;
+   border-spacing: 0 50px;
+    padding: 0 50px 0 50px;
+
+
+}
+th {
+	font-size: 20px;
+}
+th, td {
+  padding: 0px;
+}
+	</style>
+</head>
+<body>
+
+{%   include 'dormheader.html'    %}
+
+<h1 style="margin-left: 500px; margin-top: 90px;">your listings</h1>
+
+
+  <table class="table table-hover" style="width: 70%; margin-top: 20px; margin-left: 160px;">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>listing title</th>
+        <th>date posted</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{%  for listing in userlistings   %}
+      <tr>
+        <td>{{listing.listing_id}}</td>
+        <td><a href="/editpost/{{listing.listing_id}}">
+         {{ listing.listing_title }}</a></td>
+        <td>{{listing.listing_added}}</td>
+      </tr>
+     
+     {%   endfor   %}
+    </tbody>
+  </table>
+
+
+
+</body>
+</html>

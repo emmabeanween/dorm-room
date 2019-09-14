@@ -1,0 +1,82 @@
+ <!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+
+{% include 'dormheader.html' %}
+
+
+{%  for message in get_flashed_messages()   %}
+<div class="alert alert-info alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{message}}</strong> 
+  </div>
+{%   endfor  %} 
+
+
+
+<h1 style="text-align: center; font-size: 60px; margin-top: 80px;">Welcome to DormRoom.</h1>
+
+
+
+<i class="fa fa-bed" style="font-size: 170px; margin-left: 330px; margin-top: 80px;"></i>
+<i class="fa fa-university" style="font-size: 200px; margin-top: 10px; margin-left: 15px; "></i>
+<i class="fa fa-home" style="font-size: 200px; " ></i>
+
+
+<div class="outer" style="float:left; width: 400px; height: 250px; background-color: lightgray; margin-left: 250px; margin-top: 100px; position: relative;">
+<div class="inner" style="width: 350px; height: 200px; background-color: white; position: absolute; left: 6%; top: 11%;
+padding: 10px 15px; font-size: 20px;">
+Tired of Craigslist and scummy Facebook Housing groups? Say hi to a new roomie, because hello sunshine - you're about to get a new place.
+</div>
+</div>
+
+
+
+<div class="outer" style=" width: 400px; height: 250px; background-color: lightgray;float: right; margin-top: 100px; margin-right: 200px; position: relative;">
+  
+<div class="inner" style="width: 350px; height: 200px; background-color: white; position: absolute; left: 6%; top: 11%; padding: 10px 15px; font-size: 20px;">
+DormRoom allows you to post housing listings as a broke college student. Mix up that ramen packet as you type out your contact information.
+</div>
+</div>
+
+
+</br></br></br></br></br>
+<h2 style="font-size: 50px; margin-top: 400px; text-align: center;">latest listings</h2>
+
+
+
+
+{% for post in latest_posts   %}
+
+
+</br></br>
+<img width="200" height="200" style= "float: left; border: 1px solid black; margin-left: 150px;" src="data:;base64,{{ post.listing_photo_one.decode('utf-8', errors= 'replace') }}"/> 
+<span style="font-size: 20px; margin-top: 50px; margin-left: 20px;"><a style="color: blue;" href="{{url_for('viewpost', id = post.listing_id)}}">{{post.listing_title}}</a></span>
+</br></br>
+<span style="margin-left: 30px;"> listed at <b>{{post.listing_address}}</b></span></br></br>
+{%  if (now - post.listing_added).days  == 1 %}
+<span style="margin-left: 30px;"> listed <b>{{(now-post.listing_added).days}} day ago</b></span>
+{%  else %}
+
+<span style="margin-left: 30px;"> listed <b> {{(now - post.listing_added).days}} days ago </b></span>
+
+{%    endif   %} </br></br>
+
+
+<span style="margin-left:30px;">listed for <b>${{post.listing_price|round}}</b></span>
+
+</br></br></br></br></br>
+<hr style="height: 5px; color: gray; width: 30%;">
+</br></br></br>
+
+
+
+{%  endfor  %}
+
+
+
+</body>
+</html>

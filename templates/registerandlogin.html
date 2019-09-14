@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+
+
+    var tabs = $("#tabs").tabs({
+        activate: function(event, ui){
+            var active = $("#tabs").tabs("option", "active");
+            $.cookie("activeTabIndex", active);
+        }
+    });
+
+    var activeTabIndex = $.cookie("activeTabIndex");
+
+    if(activeTabIndex !== undefined) {
+        tabs.tabs("option", "active", activeTabIndex);
+    }
+
+
+
+  </script>
+</head>
+<body>
+
+<i class="fa fa-bed" style="font-size: 40px; margin-left: 30px;" aria-hidden="true"></i>&nbsp&nbsp<a href="dormhome" style="color: red; text-decoration: none!important; font-size: 18px; "> back to DormRoom</a>
+
+
+ <div class="container">
+   <h1 style="margin-left: 370px; margin-top: 40px;">new? register here. </br> if not? welcome back.</h1>
+ </div>
+<div id="tabs" style="width: 40%; margin-left: 350px; margin-top: 40px;">
+  <ul>
+    <li style= "margin-left: 170px;"><a href="#tabs-1">register</a></li>
+    <li><a href="#tabs-2">login</a></li>
+  </ul>
+  <div id="tabs-1">
+
+<form action="{{url_for('registerandlogin')}}" method="POST">
+  <div class="form-group">
+    <label for="name">enter your name</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{request.form['name']}}">
+  </div>
+  <div class="form-group">
+    <label for="pwd">enter a password</label>
+    <input type="password" class="form-control" id="pwd" name="password" value="{{request.form['password']}}">
+  </div>
+    <div class="form-group">
+    <label for="name">enter your school email</label>
+    <input type="email" class="form-control" id="school_email" name="school_email" value="{{request.form['school_email']}}">
+  </div>
+  <label>your school</label></br>
+<select name="school">
+  <option value="UCSD">University of California, San Diego</option>
+  <option value="UCD">University of California, Davis</option>
+  <option value="UCB">University of California, Berkeley</option>
+  <option value="UCSC">University of California, Santa Cruz</option>
+  <option value = "UCSB">University of California, Santa Barbara</option>
+  <option value = "UCI">University of California, Irvine</option>
+  <option value = "UCLA">University of California, Los Angeles</option>
+</select></br></br>
+   <input type="submit" name="button" value="join" class="btn btn-default"/>
+  
+</form>
+
+   
+  </div>
+  <div id="tabs-2">
+
+<form action="{{url_for('registerandlogin')}}" method="POST">
+  <div class="form-group">
+    <label for="email">enter your email</label>
+    <input type="email" class="form-control" id="email" name="email">
+  </div>
+  <div class="form-group">
+    <label for="pwd">enter your password</label>
+    <input type="password" class="form-control" id="pwd" name="loginpassword">
+  </div>
+   <input type="submit" name="button" value="login" class="btn btn-default"/>
+
+</form>
+  </br>
+   <a style="color: blue;" href="{{url_for('forgotpassword')}}"> forgot password?</a>
+
+
+
+
+
+
+
+
+  </div>
+  
+</div>
+
+
+{%  for message in get_flashed_messages()   %}
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{message}}</strong> 
+  </div>
+{%   endfor  %} 
+ 
+</body>
+</html>

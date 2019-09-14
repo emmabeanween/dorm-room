@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+	{% include 'dormheader.html' %}
+
+  
+	<h1 style="margin-left: 570px; margin-top: 50px;">post</h1>
+  <i class="fa fa-pencil" style="font-size:36px; margin-left: 590px;"></i>
+      
+
+
+	<div style=" overflow-y: auto;width: 450px; height: 400px; margin-top: 20px; background-color: #f7efef; border: 0.5px solid gray; margin-left: 400px;
+  padding: 10px 15px;">
+		
+     <form action="{{url_for('post')}}" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="title">title</label>
+    <input type="text" name="title"  class="form-control" name="title" value="{{request.form['title']}}" placeholder=" e.g. seeking clean, neat undergrad student to sublease my apartment near Hollywood">
+  </div>
+   <div class="form-group">
+    <label for="description">description</label>
+    <textarea class="form-control" name="description" value="{{request.form['description']}}" placeholder="e.g. This is a cute cottage-style studio just near WeHo, with great restaurants..."></textarea>
+  </div>
+    <div class="form-group">
+    <label for="address">address</label>
+    <input type="text" class="form-control" name="address" value="{{request.form['address']}}" placeholder="e.g. 13 Rainbow Rd. Mario City">
+</div>
+
+   <div class="form-group">
+    <label for = "aptnumber">apt/suite# (optional)</label>
+    <input type="text" class="form-control" name="aptnumber" value="{{request.form['aptnumber']}}" placeholder="123">
+
+    </div>
+
+    <div class="form-group">
+    	<label for = "city"> city </label>
+        <input type = "text" class="form-control" name="city" value="{{request.form['city']}}" placeholder="Sacramento">
+    </div>
+
+    <div class="form-group">
+    <label for = "state">state</label>
+    <input type = "text" class="form-control" name="state" value="{{request.form['state']}}" placeholder="California">
+
+    </div>
+
+	<div class = "form-group">
+		<label for = "price">price</label>
+		<input type = "text" class="form-control" name="price" value="{{request.form['price']}}" placeholder="$800" >
+
+
+	</div>
+
+ <div class="form-group">
+    <label for="address"> contact phone number</label>
+    <input type="text" class="form-control" name="phonenumber" value="{{request.form['phonenumber']}}" placeholder="e.g. 123-456-7890">
+ 	</div>
+
+ 	<div class="form-group">
+ 		<label for="contact">contact name</label></br>
+ 		<input type="text" name="contactname" class="form-control" placeholder="{{name}}" value="{{request.form['contactname']}}">
+ 	</div>
+    
+    <div class="form-group">
+    	<label>contact email</label></br>
+      <input type="email" class="form-control" name="contactemail" placeholder="{{email}}" value="{{request.form['contactemail']}}">
+    </div>
+
+    <div class="form-group">
+    	<label>photos</label></br>
+	<input type = "file" name="photos[]" value="photos[]"  multiple/>
+   </div>
+
+   
+
+	</div>
+
+ 
+  <button style="background-color: lightblue; margin-left: 570px; margin-top: 10px;" type="submit" name="button" value="addpost" class="btn btn-default">add post</button>
+  </form>
+{%  for message in get_flashed_messages()   %}
+<div class="alert alert-info alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{message}}</strong> 
+  </div>
+{%   endfor  %} 
+
+
+
+</body>
+</html>
