@@ -30,8 +30,8 @@ mail_settings = {
     "MAIL_PORT": 465,
     "MAIL_USE_TLS": False,
     "MAIL_USE_SSL": True,
-    "MAIL_USERNAME": 'emmagk13@gmail.com',
-    "MAIL_PASSWORD": 'ihatelife'
+    "MAIL_USERNAME": 'xxxxxxx@gmail.com',
+    "MAIL_PASSWORD": 'xxxxxxxxxxxx'
     
 }
 
